@@ -37,8 +37,8 @@ export default function HomePage() {
       {/* Hero Section */}
       <main>
         <section className="container mx-auto px-4 pt-20 pb-16 text-center md:pt-28 md:pb-20">
-          <Badge variant="success" className="mb-6 inline-flex">
-            <Sparkles className="mr-1 h-3 w-3" />
+          <Badge className="mb-6 inline-flex gap-1">
+            <Sparkles className="h-3 w-3" />
             出海开发者的技术加速器
           </Badge>
 
@@ -115,7 +115,7 @@ export default function HomePage() {
             <div className="mx-auto max-w-4xl">
               <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
                 <div>
-                  <Badge variant="success" className="mb-4">功能一览</Badge>
+                  <Badge className="mb-4">功能一览</Badge>
                   <h2 className="font-serif text-3xl font-bold text-foreground text-balance">
                     一站式出海技术解决方案
                   </h2>
@@ -154,7 +154,7 @@ export default function HomePage() {
               免费注册，立即开始生成你的技术栈提示词，或购买代码包直接启动项目。
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Link href="/sign-up">
+              <Link href="/auth/sign-up">
                 <Button size="lg" className="gap-2">
                   免费注册
                   <ArrowRight className="h-4 w-4" />

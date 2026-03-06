@@ -19,9 +19,11 @@ export async function createCheckoutSession(
 
   const userId = session.user.id
 
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
+
   const checkoutSession = await stripe.checkout.sessions.create({
     ui_mode: "embedded",
-    redirect_on_completion: "never",
+    return_url: `${appUrl}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,
     line_items: [
       {
         price_data: {
