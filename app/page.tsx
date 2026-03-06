@@ -50,7 +50,7 @@ export default function HomePage() {
             <span className="gradient-text">出海 MVP</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
             选择技术栈，免费获取 AI 提示词；付费下载可运行代码；或者让我们直接帮你打造完整 MVP。
           </p>
 
@@ -72,17 +72,17 @@ export default function HomePage() {
           <div className="mt-12 flex flex-wrap items-center justify-center gap-8">
             <div className="text-center">
               <p className="font-serif text-3xl font-bold text-foreground">30+</p>
-              <p className="text-sm text-muted-foreground">精选技术工具</p>
+              <p className="text-sm text-muted">精选技术工具</p>
             </div>
             <div className="h-8 w-px bg-border" />
             <div className="text-center">
               <p className="font-serif text-3xl font-bold text-foreground">8</p>
-              <p className="text-sm text-muted-foreground">技术类别</p>
+              <p className="text-sm text-muted">技术类别</p>
             </div>
             <div className="h-8 w-px bg-border" />
             <div className="text-center">
               <p className="font-serif text-3xl font-bold text-foreground">$20</p>
-              <p className="text-sm text-muted-foreground">起步价</p>
+              <p className="text-sm text-muted">起步价</p>
             </div>
           </div>
         </section>
@@ -100,7 +100,7 @@ export default function HomePage() {
                   <h3 className="mb-2 font-serif text-lg font-bold text-foreground">
                     {s.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
+                  <p className="text-sm leading-relaxed text-muted">
                     {s.description}
                   </p>
                 </div>
@@ -122,7 +122,7 @@ export default function HomePage() {
                   <h2 className="font-serif text-3xl font-bold text-foreground text-balance">
                     一站式出海技术解决方案
                   </h2>
-                  <p className="mt-4 text-muted-foreground leading-relaxed">
+                  <p className="mt-4 text-muted leading-relaxed">
                     从技术选型到代码交付，帮你跳过繁琐的调研和配置，专注于产品本身。
                   </p>
                   <div className="mt-6 flex gap-3">
@@ -153,7 +153,7 @@ export default function HomePage() {
             <h2 className="font-serif text-3xl font-bold text-foreground md:text-4xl text-balance">
               准备好出海了吗？
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-md text-muted">
               免费注册，立即开始生成你的技术栈提示词，或购买代码包直接启动项目。
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -176,14 +176,14 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t border-border py-8">
         <div className="container mx-auto flex flex-col items-center gap-3 px-4 text-center md:flex-row md:justify-between">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted">
             © 2025 出海黄金组合. 保留所有权利。
           </p>
           <div className="flex gap-4">
-            <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
+            <Link href="/pricing" className="text-sm text-muted hover:text-foreground">
               定价
             </Link>
-            <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground">
+            <Link href="/dashboard" className="text-sm text-muted hover:text-foreground">
               我的订单
             </Link>
           </div>
