@@ -1,38 +1,52 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
-import { neon } from '@neondatabase/serverless'
+import { NextRequest, NextResponse } from "next/server"
+import { stripe } from "@/lib/stripe"
+import { neon } from "@neondatabase/serverless"
 
 const sql = neon(process.env.DATABASE_URL!)
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
-  const sig = req.headers.get('stripe-signature')!
+  const sig = req.headers.get("stripe-signature")
+
+  if (!sig) {
+    return NextResponse.json({ error: "Missing stripe-signature" }, { status: 400 })
+  }
 
   let event
   try {
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!)
-  } catch (err) {
-    return NextResponse.json({ error: 'Webhook signature invalid' }, { status: 400 })
+    event = stripe.webhooks.constructEvent(
+      body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    )
+  } catch {
+    return NextResponse.json({ error: "Webhook signature invalid" }, { status: 400 })
   }
 
-  if (event.type === 'checkout.session.completed') {
+  if (event.type === "checkout.session.completed") {
     const session = event.data.object
-    const { orderId, productId } = session.metadata ?? {}
-    if (!orderId) return NextResponse.json({ ok: true })
+    const productId = session.metadata?.productId
+    const sessionId = session.id
 
-    if (productId === 'template-code') {
-      // $20 自动交付：更新状态为 completed，下载链接由 return URL 生成
+    if (productId === "template-code") {
+      // $20 自动交付：更新为 completed，下载链接指向 API 路由（按订单 ID 生成）
       await sql`
         UPDATE orders
-        SET status = 'completed', stripe_session_id = ${session.id}, updated_at = NOW()
-        WHERE id = ${orderId}
+        SET
+          status = 'completed',
+          stripe_payment_intent_id = ${session.payment_intent as string | null},
+          updated_at = NOW()
+        WHERE stripe_session_id = ${sessionId}
       `
-    } else if (productId === 'mvp-service') {
-      // $200 人工交付：更新为 paid，等待需求填写
+    } else if (productId === "mvp-service") {
+      // $200 人工交付：更新为 paid，等待用户填写需求
       await sql`
         UPDATE orders
-        SET status = 'paid', stripe_session_id = ${session.id}, updated_at = NOW()
-        WHERE id = ${orderId}
+        SET
+          status = 'paid',
+          stripe_payment_intent_id = ${session.payment_intent as string | null},
+          updated_at = NOW()
+        WHERE stripe_session_id = ${sessionId}
       `
     }
   }

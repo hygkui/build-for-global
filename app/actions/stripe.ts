@@ -1,32 +1,31 @@
-'use server'
+"use server"
 
-import { stripe } from '@/lib/stripe'
-import { PRODUCTS } from '@/lib/products'
-import { neon } from '@neondatabase/serverless'
+import { stripe } from "@/lib/stripe"
+import { getProductById } from "@/lib/products"
+import { neon } from "@neondatabase/serverless"
+import { auth } from "@/lib/auth/server"
 
 const sql = neon(process.env.DATABASE_URL!)
 
 export async function createCheckoutSession(
   productId: string,
-  userId: string,
-  techStack?: string,
+  techStack?: string
 ): Promise<string> {
-  const product = PRODUCTS.find(p => p.id === productId)
+  const product = getProductById(productId)
   if (!product) throw new Error(`Product "${productId}" not found`)
 
-  const [order] = await sql`
-    INSERT INTO orders (user_id, product_id, product_name, amount, status, tech_stack)
-    VALUES (${userId}, ${productId}, ${product.name}, ${product.priceInCents}, 'pending', ${techStack ?? null})
-    RETURNING id
-  `
+  const { data: session } = await auth.getSession()
+  if (!session?.user) throw new Error("Unauthenticated")
 
-  const session = await stripe.checkout.sessions.create({
-    ui_mode: 'embedded',
-    redirect_on_completion: 'never',
+  const userId = session.user.id
+
+  const checkoutSession = await stripe.checkout.sessions.create({
+    ui_mode: "embedded",
+    redirect_on_completion: "never",
     line_items: [
       {
         price_data: {
-          currency: 'usd',
+          currency: "usd",
           unit_amount: product.priceInCents,
           product_data: {
             name: product.name,
@@ -36,13 +35,27 @@ export async function createCheckoutSession(
         quantity: 1,
       },
     ],
-    mode: 'payment',
+    mode: "payment",
     metadata: {
-      orderId: order.id,
-      productId,
       userId,
+      productId,
+      techStack: techStack ?? "",
     },
   })
 
-  return session.client_secret!
+  // 创建 pending 订单，用 stripe_session_id 关联
+  await sql`
+    INSERT INTO orders (user_id, product_id, product_name, amount_cents, status, stripe_session_id, tech_stack)
+    VALUES (
+      ${userId},
+      ${productId},
+      ${product.name},
+      ${product.priceInCents},
+      'pending',
+      ${checkoutSession.id},
+      ${techStack ?? null}
+    )
+  `
+
+  return checkoutSession.client_secret!
 }

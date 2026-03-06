@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, Syne, JetBrains_Mono } from "next/font/google"
+import { NeonAuthUIProvider } from "@neondatabase/auth/react"
+import { authClient } from "@/lib/auth/client"
 import "./globals.css"
 
 const inter = Inter({
@@ -41,11 +43,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh-CN" className="dark">
+    <html lang="zh-CN" className="dark" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${syne.variable} ${jetbrainsMono.variable} font-sans min-h-screen bg-background text-foreground`}
       >
-        {children}
+        <NeonAuthUIProvider
+          authClient={authClient}
+          redirectTo="/dashboard"
+          emailOTP
+          credentials={{ forgotPassword: true }}
+        >
+          {children}
+        </NeonAuthUIProvider>
       </body>
     </html>
   )
