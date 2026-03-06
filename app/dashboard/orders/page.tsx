@@ -1,22 +1,26 @@
-import { neon } from '@neondatabase/serverless'
-import Link from 'next/link'
-import { Package, FileDown, MessageSquare, Clock } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { neon } from "@neondatabase/serverless"
+import { redirect } from "next/navigation"
+import Link from "next/link"
+import { Package, FileDown, MessageSquare, Clock } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { auth } from "@/lib/auth/server"
+
+export const dynamic = "force-dynamic"
 
 const sql = neon(process.env.DATABASE_URL!)
 
 export const metadata = {
-  title: '我的订单 - 出海黄金组合',
+  title: "我的订单 - 出海黄金组合",
 }
 
-// 演示用固定用户，实际接入 Neon Auth 后替换
-const DEMO_USER_ID = 'demo-user'
-
 export default async function OrdersPage() {
+  const { data: session } = await auth.getSession()
+  if (!session?.user) redirect("/auth/sign-in")
+
   const orders = await sql`
-    SELECT id, product_id, product_name, amount, status, tech_stack, requirements, created_at
+    SELECT id, product_id, product_name, amount_cents, status, tech_stack, requirements, created_at
     FROM orders
-    WHERE user_id = ${DEMO_USER_ID}
+    WHERE user_id = ${session.user.id}
     ORDER BY created_at DESC
   `
 
@@ -32,9 +36,11 @@ export default async function OrdersPage() {
 
         {orders.length === 0 ? (
           <div className="text-center py-20 border border-border rounded-2xl bg-card">
-            <Package className="w-12 h-12 text-muted mx-auto mb-4" />
+            <Package className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h2 className="text-lg font-semibold text-foreground mb-2">暂无订单</h2>
-            <p className="text-muted text-sm mb-6">购买模板代码包或 MVP 外包服务后，订单会显示在这里。</p>
+            <p className="text-muted-foreground text-sm mb-6">
+              购买模板代码包或 MVP 外包服务后，订单会显示在这里。
+            </p>
             <Link href="/pricing">
               <Button>查看方案</Button>
             </Link>
@@ -53,33 +59,33 @@ export default async function OrdersPage() {
 
 function OrderCard({ order }: { order: any }) {
   const statusConfig: Record<string, { label: string; color: string }> = {
-    pending:    { label: '待支付', color: 'text-yellow-500' },
-    paid:       { label: '已支付', color: 'text-blue-400' },
-    processing: { label: '处理中', color: 'text-accent' },
-    completed:  { label: '已完成', color: 'text-green-400' },
-    cancelled:  { label: '已取消', color: 'text-muted' },
+    pending:    { label: "待支付",    color: "text-yellow-500" },
+    paid:       { label: "已支付",    color: "text-blue-400" },
+    processing: { label: "处理中",    color: "text-accent" },
+    completed:  { label: "已完成",    color: "text-green-400" },
+    cancelled:  { label: "已取消",    color: "text-muted-foreground" },
   }
-  const status = statusConfig[order.status] ?? { label: order.status, color: 'text-muted' }
-  const isTemplate = order.product_id === 'template-code'
-  const isMvp = order.product_id === 'mvp-service'
+  const status = statusConfig[order.status] ?? { label: order.status, color: "text-muted-foreground" }
+  const isTemplate = order.product_id === "template-code"
+  const isMvp = order.product_id === "mvp-service"
 
   return (
     <div className="border border-border rounded-2xl bg-card p-6">
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
           <h3 className="font-semibold text-foreground">{order.product_name}</h3>
-          <p className="text-xs text-muted mt-1">
-            {new Date(order.created_at).toLocaleDateString('zh-CN')}
+          <p className="text-xs text-muted-foreground mt-1">
+            {new Date(order.created_at).toLocaleDateString("zh-CN")}
           </p>
         </div>
         <div className="text-right">
-          <p className="font-bold text-foreground">${order.amount / 100}</p>
+          <p className="font-bold text-foreground">${order.amount_cents / 100}</p>
           <p className={`text-xs mt-1 font-medium ${status.color}`}>{status.label}</p>
         </div>
       </div>
 
       <div className="flex items-center gap-3 flex-wrap">
-        {isTemplate && order.status === 'completed' && (
+        {isTemplate && order.status === "completed" && (
           <Link href={`/api/download/${order.id}`}>
             <Button size="sm" variant="outline" className="gap-2">
               <FileDown className="w-4 h-4" />
@@ -87,7 +93,7 @@ function OrderCard({ order }: { order: any }) {
             </Button>
           </Link>
         )}
-        {isMvp && order.status === 'paid' && (
+        {isMvp && order.status === "paid" && (
           <Link href={`/dashboard/orders/${order.id}/requirements`}>
             <Button size="sm" className="gap-2">
               <MessageSquare className="w-4 h-4" />
@@ -95,10 +101,16 @@ function OrderCard({ order }: { order: any }) {
             </Button>
           </Link>
         )}
-        {isMvp && order.status === 'processing' && (
-          <div className="flex items-center gap-2 text-sm text-muted">
+        {isMvp && order.status === "processing" && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
             需求已提交，等待团队联系
+          </div>
+        )}
+        {isMvp && order.status === "completed" && (
+          <div className="flex items-center gap-2 text-sm text-green-400">
+            <Clock className="w-4 h-4" />
+            项目已交付
           </div>
         )}
       </div>
