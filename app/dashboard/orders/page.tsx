@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Package, FileDown, MessageSquare, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { auth } from "@/lib/auth/server"
+import type { Order } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
@@ -47,8 +48,8 @@ export default async function OrdersPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            {orders.map((order: any) => (
-              <OrderCard key={order.id} order={order} />
+            {orders.map((order) => (
+              <OrderCard key={order.id} order={order as Order} />
             ))}
           </div>
         )}
@@ -57,7 +58,7 @@ export default async function OrdersPage() {
   )
 }
 
-function OrderCard({ order }: { order: any }) {
+function OrderCard({ order }: { order: Order }) {
   const statusConfig: Record<string, { label: string; color: string }> = {
     pending:    { label: "待支付",    color: "text-yellow-500" },
     paid:       { label: "已支付",    color: "text-blue-400" },

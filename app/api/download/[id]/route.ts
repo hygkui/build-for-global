@@ -114,7 +114,7 @@ ${techStackLabel}
 - 优先使用 Server Components，减少 \`use client\`
 - Server Actions 处理表单和数据变更
 - 数据库查询使用参数化 SQL，禁止字符串拼接
-- 环境变量使用 \`!` 断言前必须在 .env.example 中声明
+- 环境变量使用 \`!\` 断言前必须在 .env.example 中声明
 
 ## 禁止事项
 
