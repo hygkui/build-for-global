@@ -37,7 +37,7 @@
 ## pay
 
 - stripay
-- polypay
+- Polar.sh
 
 ## monitor
 
