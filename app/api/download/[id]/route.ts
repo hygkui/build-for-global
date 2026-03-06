@@ -104,17 +104,17 @@ ${techStackLabel}
 ## i18n 规范
 
 - 使用 next-intl，文件按模块拆分（不超过 200 行/文件）
-- key 命名：\`module.component.element\`，例如 \`auth.loginForm.emailLabel\`
-- 通用文案放 \`common.json\`，业务文案放各自模块
+- key 命名：\\\`module.component.element\\\`，例如 \\\`auth.loginForm.emailLabel\\\`
+- 通用文案放 \\\`common.json\\\`，业务文案放各自模块
 - 动态 key 必须用枚举兜底，禁止字符串拼接
-- 类型从 \`typeof messages\` 自动推导，零手写
+- 类型从 \\\`typeof messages\\\` 自动推导，零手写
 
 ## 代码规范
 
-- 优先使用 Server Components，减少 \`use client\`
+- 优先使用 Server Components，减少 \\\`"use client"\\\`
 - Server Actions 处理表单和数据变更
 - 数据库查询使用参数化 SQL，禁止字符串拼接
-- 环境变量使用 \`!\` 断言前必须在 .env.example 中声明
+- 环境变量使用 \\\`!\\\` 断言前必须在 .env.example 中声明
 
 ## 禁止事项
 
