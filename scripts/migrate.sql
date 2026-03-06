@@ -1,10 +1,10 @@
 -- 出海黄金组合 数据库迁移
--- 依赖 neon_auth.users_sync 表（由 Neon Auth 自动创建）
+-- user_id 存储 Neon Auth 的用户 ID（字符串）
 
 -- 订单表
 CREATE TABLE IF NOT EXISTS orders (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id TEXT NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL,
   product_id TEXT NOT NULL,              -- 'template-code' | 'mvp-service'
   product_name TEXT NOT NULL,
   amount_cents INTEGER NOT NULL,         -- 价格（分）
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS orders (
 -- 技术栈配置保存（用户可保存自己的配置）
 CREATE TABLE IF NOT EXISTS saved_stacks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id TEXT NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL,
   name TEXT NOT NULL,
   description TEXT,
   tech_stack JSONB NOT NULL,
