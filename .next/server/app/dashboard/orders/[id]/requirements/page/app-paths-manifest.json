@@ -1,0 +1,3 @@
+{
+  "/dashboard/orders/[id]/requirements/page": "app/dashboard/orders/[id]/requirements/page.js"
+}

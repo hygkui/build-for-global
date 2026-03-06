@@ -1,0 +1,20 @@
+{
+  "node": {
+    "40610b346ce47aba32f0124bfc7b203028a659906f": {
+      "workers": {
+        "app/dashboard/orders/[id]/requirements/page": {
+          "moduleId": 77802,
+          "async": true,
+          "exportedName": "submitRequirements",
+          "filename": "app/actions/orders.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/orders/[id]/requirements/page": "action-browser"
+      },
+      "exportedName": "submitRequirements",
+      "filename": "app/actions/orders.ts"
+    }
+  },
+  "edge": {}
+}
