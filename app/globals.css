@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@neondatabase/auth/ui/tailwind";
+
 @layer base {
   :root {
     /* 深色科技风主题 */

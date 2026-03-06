@@ -1,8 +1,7 @@
 import Link from "next/link"
-import { ArrowRight, Sparkles, Code, Users, CheckCircle } from "lucide-react"
+import { ArrowRight, Sparkles, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import { GeneratorSection } from "@/components/generator-section"
 
 const STEPS = [
@@ -35,8 +34,6 @@ const FEATURES = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-
       {/* Hero Section */}
       <main>
         <section className="container mx-auto px-4 pt-20 pb-16 text-center md:pt-28 md:pb-20">
