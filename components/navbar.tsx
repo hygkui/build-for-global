@@ -26,20 +26,20 @@ export async function Navbar() {
         <nav className="hidden items-center gap-6 md:flex" aria-label="主导航">
           <Link
             href="/#generator"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm text-muted transition-colors hover:text-foreground"
           >
             技术栈生成器
           </Link>
           <Link
             href="/pricing"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm text-muted transition-colors hover:text-foreground"
           >
             价格
           </Link>
           {isLoggedIn && (
             <Link
               href="/dashboard/orders"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm text-muted transition-colors hover:text-foreground"
             >
               我的订单
             </Link>

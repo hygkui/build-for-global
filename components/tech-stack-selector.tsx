@@ -126,7 +126,7 @@ function OptionButton({ option, isSelected, onSelect, deployId, dbId }: {
         "relative flex flex-col items-start rounded-lg border p-3 text-left transition-all duration-200",
         isSelected
           ? "border-primary bg-primary/10 text-foreground shadow-md shadow-primary/10"
-          : "border-border bg-secondary/30 text-muted-foreground hover:border-border/80 hover:bg-secondary/60 hover:text-foreground"
+          : "border-border bg-secondary/30 text-muted hover:border-border/80 hover:bg-secondary/60 hover:text-foreground"
       )}
     >
       {isSelected && (
@@ -168,7 +168,7 @@ function CategoryCard({ category, selected, selectedStack, onSelect }: {
                 <span className="rounded bg-destructive/20 px-1.5 py-0.5 text-[10px] font-medium text-destructive">当前平台不支持</span>
               )}
             </div>
-            <p className="text-xs text-muted-foreground">{category.description}</p>
+            <p className="text-xs text-muted">{category.description}</p>
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0 ml-2">
@@ -177,7 +177,7 @@ function CategoryCard({ category, selected, selectedStack, onSelect }: {
               {category.options.find((o) => o.id === selected)?.name}
             </span>
           )}
-          {expanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
+          {expanded ? <ChevronUp className="h-4 w-4 text-muted" /> : <ChevronDown className="h-4 w-4 text-muted" />}
         </div>
       </button>
 
@@ -203,8 +203,8 @@ function CategoryCard({ category, selected, selectedStack, onSelect }: {
 
           {compat && category.id === "cron" && (
             <div className="flex items-start gap-2 rounded-lg border border-border bg-secondary/30 px-3 py-2.5">
-              <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              <p className="text-xs text-muted-foreground">{compat.cronNote}</p>
+              <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted" />
+              <p className="text-xs text-muted">{compat.cronNote}</p>
             </div>
           )}
 
@@ -213,8 +213,8 @@ function CategoryCard({ category, selected, selectedStack, onSelect }: {
               "flex items-start gap-2 rounded-lg border px-3 py-2.5",
               compat.supportsWs ? "border-border bg-secondary/30" : "border-yellow-500/30 bg-yellow-500/10"
             )}>
-              <Info className={cn("mt-0.5 h-3.5 w-3.5 shrink-0", compat.supportsWs ? "text-muted-foreground" : "text-yellow-500")} />
-              <p className={cn("text-xs", compat.supportsWs ? "text-muted-foreground" : "text-yellow-600 dark:text-yellow-400")}>
+              <Info className={cn("mt-0.5 h-3.5 w-3.5 shrink-0", compat.supportsWs ? "text-muted" : "text-yellow-500")} />
+              <p className={cn("text-xs", compat.supportsWs ? "text-muted" : "text-yellow-600 dark:text-yellow-400")}>
                 {compat.wsNote}
               </p>
             </div>
@@ -253,7 +253,7 @@ function CompatWarningBanner({ selected }: { selected: SelectedStack }) {
             <p className={cn("text-xs font-semibold", w.type === "error" ? "text-destructive" : "text-yellow-600 dark:text-yellow-400")}>
               {w.message}
             </p>
-            {w.tip && <p className="mt-0.5 text-xs text-muted-foreground">{w.tip}</p>}
+            {w.tip && <p className="mt-0.5 text-xs text-muted">{w.tip}</p>}
           </div>
         </div>
       ))}
@@ -285,13 +285,13 @@ export function TechStackSelector({ onChange }: { onChange: (selected: SelectedS
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted">
           已选择 <span className="font-semibold text-foreground">{selectedCount}</span> 项技术
         </p>
         {selectedCount > 0 && (
           <button
             onClick={() => { setSelected({}); onChange({}) }}
-            className="text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+            className="text-xs text-muted underline-offset-2 hover:text-foreground hover:underline"
           >
             清空选择
           </button>

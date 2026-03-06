@@ -65,7 +65,7 @@ function OrderCard({ order }: { order: any }) {
     completed:  { label: "已完成",    color: "text-green-400" },
     cancelled:  { label: "已取消",    color: "text-muted" },
   }
-  const status = statusConfig[order.status] ?? { label: order.status, color: "text-muted-foreground" }
+  const status = statusConfig[order.status] ?? { label: order.status, color: "text-muted" }
   const isTemplate = order.product_id === "template-code"
   const isMvp = order.product_id === "mvp-service"
 
@@ -102,7 +102,7 @@ function OrderCard({ order }: { order: any }) {
           </Link>
         )}
         {isMvp && order.status === "processing" && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-muted">
             <Clock className="w-4 h-4" />
             需求已提交，等待团队联系
           </div>

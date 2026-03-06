@@ -33,14 +33,14 @@ export function NavbarMobile({ isLoggedIn }: NavbarMobileProps) {
         <nav className="flex flex-col gap-3 pt-4" aria-label="移动端导航">
           <Link
             href="/#generator"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm text-muted transition-colors hover:text-foreground"
             onClick={() => setOpen(false)}
           >
             技术栈生成器
           </Link>
           <Link
             href="/pricing"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm text-muted transition-colors hover:text-foreground"
             onClick={() => setOpen(false)}
           >
             价格
@@ -48,7 +48,7 @@ export function NavbarMobile({ isLoggedIn }: NavbarMobileProps) {
           {isLoggedIn && (
             <Link
               href="/dashboard/orders"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm text-muted transition-colors hover:text-foreground"
               onClick={() => setOpen(false)}
             >
               我的订单

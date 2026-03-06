@@ -34,7 +34,7 @@ export default async function RequirementsPage({ params }: Props) {
       <main className="min-h-screen bg-background pt-24 pb-20">
         <div className="max-w-xl mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-3">需求已提交</h1>
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-muted leading-relaxed">
             你的项目需求已成功提交，我们的团队将在 24 小时内通过邮件与你联系。
           </p>
         </div>
@@ -52,7 +52,7 @@ export default async function RequirementsPage({ params }: Props) {
           <h1 className="text-3xl font-bold font-sans text-foreground mb-2">
             填写项目需求
           </h1>
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-muted leading-relaxed">
             请尽量详细描述你的项目，帮助我们准确理解目标、减少沟通成本、更快交付。
           </p>
         </div>
