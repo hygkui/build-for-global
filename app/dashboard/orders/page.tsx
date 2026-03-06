@@ -36,9 +36,9 @@ export default async function OrdersPage() {
 
         {orders.length === 0 ? (
           <div className="text-center py-20 border border-border rounded-2xl bg-card">
-            <Package className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <Package className="w-12 h-12 text-muted mx-auto mb-4" />
             <h2 className="text-lg font-semibold text-foreground mb-2">暂无订单</h2>
-            <p className="text-muted-foreground text-sm mb-6">
+            <p className="text-muted text-sm mb-6">
               购买模板代码包或 MVP 外包服务后，订单会显示在这里。
             </p>
             <Link href="/pricing">
@@ -63,7 +63,7 @@ function OrderCard({ order }: { order: any }) {
     paid:       { label: "已支付",    color: "text-blue-400" },
     processing: { label: "处理中",    color: "text-accent" },
     completed:  { label: "已完成",    color: "text-green-400" },
-    cancelled:  { label: "已取消",    color: "text-muted-foreground" },
+    cancelled:  { label: "已取消",    color: "text-muted" },
   }
   const status = statusConfig[order.status] ?? { label: order.status, color: "text-muted-foreground" }
   const isTemplate = order.product_id === "template-code"
@@ -74,7 +74,7 @@ function OrderCard({ order }: { order: any }) {
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
           <h3 className="font-semibold text-foreground">{order.product_name}</h3>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-muted mt-1">
             {new Date(order.created_at).toLocaleDateString("zh-CN")}
           </p>
         </div>

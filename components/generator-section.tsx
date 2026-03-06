@@ -17,7 +17,7 @@ export function GeneratorSection() {
         <h2 className="font-serif text-3xl font-bold text-foreground md:text-4xl">
           技术栈选择器
         </h2>
-        <p className="mt-3 text-base text-muted-foreground">
+        <p className="mt-3 text-base text-muted">
           选择你的技术组合，自动生成项目初始化提示词
         </p>
       </div>

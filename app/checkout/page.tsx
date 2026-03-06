@@ -32,14 +32,14 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           <h1 className="text-3xl font-bold font-sans text-foreground mb-2">
             {product.name}
           </h1>
-          <p className="text-muted-foreground">{product.description}</p>
+          <p className="text-muted">{product.description}</p>
         </div>
 
         {/* 订单摘要 */}
         <div className="border border-border rounded-xl p-5 mb-6 bg-card">
           <h2 className="text-sm font-semibold text-foreground mb-4">订单摘要</h2>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">{product.name}</span>
+            <span className="text-muted">{product.name}</span>
             <span className="text-foreground font-semibold">
               ${product.priceInCents / 100}
             </span>
