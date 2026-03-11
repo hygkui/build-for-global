@@ -37,12 +37,26 @@ export async function Navbar() {
             价格
           </Link>
           {isLoggedIn && (
-            <Link
-              href="/dashboard/orders"
-              className="text-sm text-muted transition-colors hover:text-foreground"
-            >
-              我的订单
-            </Link>
+            <>
+              <Link
+                href="/dashboard/templates"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                我的模板
+              </Link>
+              <Link
+                href="/dashboard/chat"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                对话历史
+              </Link>
+              <Link
+                href="/dashboard/orders"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                订单
+              </Link>
+            </>
           )}
         </nav>
 

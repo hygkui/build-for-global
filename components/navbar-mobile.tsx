@@ -46,13 +46,29 @@ export function NavbarMobile({ isLoggedIn }: NavbarMobileProps) {
             价格
           </Link>
           {isLoggedIn && (
-            <Link
-              href="/dashboard/orders"
-              className="text-sm text-muted transition-colors hover:text-foreground"
-              onClick={() => setOpen(false)}
-            >
-              我的订单
-            </Link>
+            <>
+              <Link
+                href="/dashboard/templates"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+                onClick={() => setOpen(false)}
+              >
+                我的模板
+              </Link>
+              <Link
+                href="/dashboard/chat"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+                onClick={() => setOpen(false)}
+              >
+                对话历史
+              </Link>
+              <Link
+                href="/dashboard/orders"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+                onClick={() => setOpen(false)}
+              >
+                订单
+              </Link>
+            </>
           )}
           {!isLoggedIn && (
             <div className="flex flex-col gap-2 pt-2">
