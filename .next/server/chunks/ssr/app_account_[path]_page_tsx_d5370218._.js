@@ -1,3 +1,0 @@
-module.exports=[83852,a=>{"use strict";var b=a.i(2537),c=a.i(1371),c=c;a.i(58073),a.i(68962),a.i(30031);var d={SETTINGS:"settings",SECURITY:"security",TEAMS:"teams",API_KEYS:"api-keys",ORGANIZATIONS:"organizations"};function e(){return Object.values(d).map(a=>({path:a}))}async function f({params:a}){let{path:d}=await a;return(0,b.jsx)("main",{className:"container mx-auto p-4 md:p-8",children:(0,b.jsx)(c.r,{path:d})})}a.s(["default",()=>f,"dynamicParams",0,!1,"generateStaticParams",()=>e],83852)}];
-
-//# sourceMappingURL=app_account_%5Bpath%5D_page_tsx_d5370218._.js.map

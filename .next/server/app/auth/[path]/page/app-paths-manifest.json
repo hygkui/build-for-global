@@ -1,3 +1,0 @@
-{
-  "/auth/[path]/page": "app/auth/[path]/page.js"
-}
